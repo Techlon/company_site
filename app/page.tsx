@@ -4,6 +4,8 @@ import Image from "next/image";
 import {
   BOOKING_URL,
   CONTACT_EMAIL,
+  HAS_BOOKING,
+  SPRINT_BOOKING_URL,
   SectionLabel,
   SiteFooter,
   SiteHeader,
@@ -126,7 +128,7 @@ const FAQS = [
   },
   {
     q: "Techlon is new. Why should we take the risk?",
-    a: "Fair question. Two answers: our work is public, so you can inspect it before you talk to us. And we scope in two-week paid increments, so you're never exposed for more than one sprint — if it isn't working, you stop, and you keep the build plan.",
+    a: "Fair question. Two answers: the projects above are our own work with the real numbers attached — including one where the honest result was that the change didn't help. And we scope in two-week paid increments, so you're never exposed for more than one sprint — if it isn't working, you stop, and you keep the build plan.",
   },
   {
     q: "How fast can you start?",
@@ -240,7 +242,7 @@ export default function Home() {
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
-                href={BOOKING_URL}
+                href={SPRINT_BOOKING_URL}
                 className="rounded bg-accent px-6 py-3 font-medium text-white transition-opacity hover:opacity-85"
               >
                 Book a discovery sprint · {SPRINT_PRICE}
@@ -380,12 +382,25 @@ export default function Home() {
               what it takes.
             </p>
             <div className="mt-10">
+              {/* Falls back to email until a booking link is configured. */}
               <a
-                href={`mailto:${CONTACT_EMAIL}`}
+                href={HAS_BOOKING ? BOOKING_URL : `mailto:${CONTACT_EMAIL}`}
                 className="inline-block rounded bg-accent px-8 py-4 font-medium text-white transition-opacity hover:opacity-85"
               >
                 Book a call
               </a>
+              {HAS_BOOKING && (
+                <p className="mt-6 text-sm text-muted">
+                  Or email us at{" "}
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="underline decoration-line underline-offset-4 transition-colors hover:text-foreground"
+                  >
+                    {CONTACT_EMAIL}
+                  </a>
+                  .
+                </p>
+              )}
             </div>
           </div>
         </section>
