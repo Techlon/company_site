@@ -3,18 +3,18 @@ import Link from "next/link";
 export const CONTACT_EMAIL = "hello@techlon.io";
 
 /**
- * Cal.com booking links. Set CAL_USERNAME once the account exists and both
- * CTAs go live; until then they fall back to the email contact section so
- * nothing on the page points at a dead link.
+ * Cal.com booking links. Slugs must match the event types on the account —
+ * "30min" and "45min" are Cal's defaults. Clearing CAL_USERNAME sends every
+ * CTA back to the email contact section rather than to a dead link.
  */
-const CAL_USERNAME = ""; // e.g. "techlon"
+const CAL_USERNAME = "techlon";
 
 const calLink = (eventSlug: string) =>
   CAL_USERNAME ? `https://cal.com/${CAL_USERNAME}/${eventSlug}` : "/#contact";
 
 export const HAS_BOOKING = Boolean(CAL_USERNAME);
-export const BOOKING_URL = calLink("intro-call");
-export const SPRINT_BOOKING_URL = calLink("discovery-sprint");
+export const BOOKING_URL = calLink("30min");
+export const SPRINT_BOOKING_URL = calLink("45min");
 
 export function Todo({ children }: { children: React.ReactNode }) {
   return (
