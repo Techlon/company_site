@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "techlon-dev-b",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "/Users/oluwagbemilesi/Projects/Creations/techlon",
+      "port": 3001,
+      "autoPort": true
+    }
+  ]
+}

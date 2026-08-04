@@ -1,65 +1,405 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import Image from "next/image";
+import {
+  BOOKING_URL,
+  CONTACT_EMAIL,
+  SectionLabel,
+  SiteFooter,
+  SiteHeader,
+  Todo,
+} from "./ui";
+import {
+  AbTestChart,
+  CannibalizationChart,
+  CnnChart,
+  FraudChart,
+  RocCurveChart,
+} from "./graphics";
+
+const SPRINT_LIST_PRICE = "$2,000";
+const SPRINT_PRICE = "$500";
+
+const TEAM = [
+  {
+    name: "Oluwagbemi Lesi",
+    role: "Founder",
+    photo: "/team/oluwagbemi.jpg",
+    bio: "MBA in Business Analytics from Case Western Reserve, on top of seven years across financial services, real estate, and FinTech regulation. Builds and validates predictive models in Python — forecasting, credit risk, NLP — and specializes in model validation: finding where reported performance overstates real signal. Before Techlon: head of operations at a FinTech checkout platform, co-founder of a real estate firm, and a lawyer designing compliance frameworks for regulated financial products.",
+  },
+  {
+    name: "Emeka Osuagwu",
+    role: "[Role]",
+    photo: "/team/emeka.jpg",
+    bio: "[Profile and photo coming.]",
+  },
+];
+
+const CAPABILITIES = [
+  {
+    n: "01",
+    title: "Product Development",
+    body: "We start before the code. Scoping, user flows, architecture decisions, and a build plan that survives contact with reality. If you know the problem but not the shape of the solution yet, this is where we begin.",
+  },
+  {
+    n: "02",
+    title: "Web & App Development",
+    body: "Production web applications and mobile apps. Modern stack, tested, documented, and handed over in a state your own engineers can pick up. No black boxes.",
+  },
+  {
+    n: "03",
+    title: "Data Science",
+    body: "Getting answers out of data you already have. Pipelines, analysis, forecasting, dashboards your team will actually open. We start with the decision you're trying to make and work backwards.",
+  },
+  {
+    n: "04",
+    title: "AI & Model Building",
+    body: "Custom models, LLM applications, RAG systems, and evaluation to prove they work. We build AI that ships to real users — not demos that fall apart the first week under load.",
+  },
+];
+
+const PRINCIPLES = [
+  {
+    title: "We scope before we quote.",
+    body: "Fixed prices on vague requirements are how projects get 40% built and abandoned. We do paid discovery first, then quote against something real.",
+  },
+  {
+    title: "You see working software every week.",
+    body: "Not status reports. A deployed environment you can click through, from week one. If we're going the wrong direction, you'll know in seven days instead of three months.",
+  },
+  {
+    title: "One team, start to finish.",
+    body: "The people on your first call are the people writing the code. No handoff to a junior team after you sign.",
+  },
+  {
+    title: "The bill is never a surprise.",
+    body: "Fixed-price sprints and a running total you can check any time. If something threatens the budget, you hear it from us first — before it costs you anything.",
+  },
+];
+
+const PROJECTS = [
+  {
+    title: "Sales Cannibalization",
+    year: "2026",
+    metric: "Adj. R² 0.9250",
+    body: "A nested logit model to find the primary drivers of a company's sales — and what share of a new product's sales came from cannibalizing existing ones.",
+    chart: CannibalizationChart,
+  },
+  {
+    title: "Fake Review Detection",
+    year: "2026",
+    metric: "ROC-AUC 0.761 · Acc 0.744",
+    body: "An ensemble of SBERT, XGBoost, and RoBERTa that detects fake product and service reviews, with an LLM auditor checking the model's calls.",
+    chart: RocCurveChart,
+  },
+  {
+    title: "A/B Testing",
+    year: "2025",
+    metric: "No significant lift",
+    body: "A one-tailed t-test on whether a new page increased conversion. It didn't — and the null held across every heterogeneity analysis. Knowing that before rollout is the point.",
+    chart: AbTestChart,
+  },
+  {
+    title: "Image Recognition",
+    year: "2023",
+    metric: "Accuracy 0.9875",
+    body: "A convolutional neural network for object classification, built with TensorFlow and Keras.",
+    chart: CnnChart,
+  },
+  {
+    title: "Credit Card Fraud Detection",
+    year: "2022",
+    metric: "F1 0.847",
+    body: "A fraud pipeline in Scikit-learn comparing XGBoost, Random Forest, SVM, decision trees, and logistic regression on heavily imbalanced transaction data. Scored on F1, not accuracy — on data this skewed, accuracy flatters a model that never catches anything.",
+    chart: FraudChart,
+  },
+];
+
+const FAQS = [
+  {
+    q: "We're a startup — is this going to be too expensive?",
+    a: "Depends what you need. An MVP scoped to prove one thing is a different project from a full platform, and we'll tell you which one you're actually asking for. The discovery sprint gives you a real number before you commit to anything.",
+  },
+  {
+    q: "We have an internal team already.",
+    a: "Plenty of our clients do. We come in for the piece the team doesn't have capacity or specialist depth for — an AI feature, a data pipeline, a rebuild of something creaking — and we work in your repos, your standards, your review process.",
+  },
+  {
+    q: "Techlon is new. Why should we take the risk?",
+    a: "Fair question. Two answers: our work is public, so you can inspect it before you talk to us. And we scope in two-week paid increments, so you're never exposed for more than one sprint — if it isn't working, you stop, and you keep the build plan.",
+  },
+  {
+    q: "How fast can you start?",
+    a: "Usually within two weeks. Tell us your timeline on the call and we'll be straight with you about whether we can hit it.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <>
+      <SiteHeader />
+
+      <main className="flex-1">
+        {/* 1. Hero */}
+        <section className="mx-auto max-w-5xl px-6 pb-24 pt-24 md:pt-36">
+          <h1 className="max-w-3xl text-4xl font-semibold leading-tight tracking-tight md:text-6xl">
+            We build software and AI products end to end, from prototype to
+            production.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
+            Techlon is a product engineering team for startups and small
+            companies. We take an idea, a rough spec, or a stalled project and
+            turn it into something real, shipped, and running in production —
+            the design, the code, the models, and the infrastructure
+            underneath.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href={BOOKING_URL}
+              className="rounded bg-accent px-6 py-3 font-medium text-white transition-opacity hover:opacity-85"
+            >
+              Book a 30-minute call
+            </a>
+            <a
+              href="#how-we-work"
+              className="rounded border border-line px-6 py-3 font-medium transition-colors hover:border-foreground"
+            >
+              See how we work
+            </a>
+          </div>
+        </section>
+
+        {/* 2. Capabilities */}
+        <section id="capabilities" className="border-t border-line">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <SectionLabel n="01">Capabilities</SectionLabel>
+            <p className="mb-14 max-w-2xl text-2xl font-medium tracking-tight md:text-3xl">
+              Four things we do. Most projects use more than one.
+            </p>
+            <div className="grid gap-x-12 gap-y-14 md:grid-cols-2">
+              {CAPABILITIES.map((cap) => (
+                <div key={cap.n}>
+                  <p className="font-mono text-sm text-accent">{cap.n}</p>
+                  <h3 className="mt-2 text-xl font-semibold tracking-tight">
+                    {cap.title}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-muted">{cap.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 3. How we work */}
+        <section id="how-we-work" className="border-t border-line">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <SectionLabel n="02">How we work</SectionLabel>
+            <p className="mb-14 max-w-2xl text-2xl font-medium tracking-tight md:text-3xl">
+              Custom software goes wrong in predictable ways. Here&apos;s how we
+              avoid them.
+            </p>
+            <div className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
+              {PRINCIPLES.map((p) => (
+                <div key={p.title} className="bg-background p-8">
+                  <h3 className="text-lg font-semibold tracking-tight">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-muted">{p.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 4. Discovery sprint — dark band */}
+        <section className="bg-panel text-panel-fg">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <p className="mb-10 font-mono text-sm uppercase tracking-widest text-panel-muted">
+              <span className="text-accent">03</span> — Discovery sprint
+            </p>
+            <h2 className="max-w-2xl text-3xl font-semibold tracking-tight md:text-4xl">
+              Not sure what you need built yet? Start here.
+            </h2>
+            <div className="mt-8 max-w-2xl space-y-5 leading-relaxed text-panel-muted">
+              <p>
+                Two weeks, fixed price. We dig into the problem, map the
+                technical approach, and hand you a complete build plan:
+                architecture, scope, timeline, and a fixed quote for the full
+                project.
+              </p>
+              <p>
+                You keep the plan whether or not you build with us. If you do
+                continue, the sprint fee comes off the project cost.
+              </p>
+              <p>
+                A discovery sprint is normally {SPRINT_LIST_PRICE}. For the
+                next three months we&apos;re running it at 75% off, while we
+                build our first public case studies. It&apos;s the cheapest way
+                to find out whether this is a three-month project or a
+                nine-month one, before you&apos;ve committed to either.
+              </p>
+            </div>
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <a
+                href={BOOKING_URL}
+                className="rounded bg-accent px-6 py-3 font-medium text-white transition-opacity hover:opacity-85"
+              >
+                Book a discovery sprint · {SPRINT_PRICE}
+              </a>
+              <p className="font-mono text-sm text-panel-muted">
+                <span className="line-through">{SPRINT_LIST_PRICE}</span>{" "}
+                <span className="ml-1 rounded border border-panel-muted/40 px-2 py-1 text-xs uppercase tracking-widest">
+                  75% off · 3 months
+                </span>
+              </p>
+            </div>
+            <div className="mt-6">
+              <Todo>
+                pin a real end date for the 75% offer — a deadline converts
+                better than &ldquo;three months&rdquo;
+              </Todo>
+            </div>
+          </div>
+        </section>
+
+        {/* 5. What we've built */}
+        <section id="work" className="border-t border-line">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <SectionLabel n="04">Work</SectionLabel>
+            <p className="mb-14 max-w-2xl text-2xl font-medium tracking-tight md:text-3xl">
+              Things we&apos;ve made
+            </p>
+            <div className="grid gap-8 md:grid-cols-2">
+              {PROJECTS.map((project, i) => {
+                const Chart = project.chart;
+                return (
+                  <div
+                    key={project.title}
+                    className={`overflow-hidden rounded-lg border border-line ${
+                      i === PROJECTS.length - 1 ? "md:col-span-2" : ""
+                    }`}
+                  >
+                    <div className="border-b border-line bg-white/50 px-4 pt-4">
+                      <Chart />
+                    </div>
+                    <div className="p-6">
+                      <p className="font-mono text-xs uppercase tracking-widest text-muted">
+                        {project.year} · <span className="text-accent">{project.metric}</span>
+                      </p>
+                      <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                        {project.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">
+                        {project.body}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* 6. Who we are */}
+        <section id="team" className="border-t border-line">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <SectionLabel n="05">Team</SectionLabel>
+            <p className="mb-6 max-w-2xl text-2xl font-medium tracking-tight md:text-3xl">
+              The people who&apos;ll be building it
+            </p>
+            <p className="max-w-2xl leading-relaxed text-muted">
+              Techlon is two engineers based in Cleveland, Ohio. We started
+              Techlon because [real reason, one sentence].
+            </p>
+            <div className="mb-4 mt-6">
+              <Todo>
+                save headshots to public/team/oluwagbemi.jpg and emeka.jpg
+                (they&apos;ll appear automatically) + one sentence on why you
+                started Techlon
+              </Todo>
+            </div>
+            <div className="mt-10 grid gap-8 sm:grid-cols-2">
+              {TEAM.map((member) => (
+                <div
+                  key={member.name}
+                  className="rounded-lg border border-line p-6"
+                >
+                  {/* Photo renders automatically once the file exists in public/ */}
+                  {existsSync(join(process.cwd(), "public", member.photo)) ? (
+                    <Image
+                      src={member.photo}
+                      alt={member.name}
+                      width={96}
+                      height={96}
+                      className="mb-4 h-24 w-24 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-line bg-line/60 font-mono text-xs text-muted">
+                      photo
+                    </div>
+                  )}
+                  <p className="font-semibold">{member.name}</p>
+                  <p className="text-sm text-muted">{member.role}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                    {member.bio}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-10 leading-relaxed text-muted">
+              Want to be one of them?{" "}
+              <a
+                href="/careers"
+                className="font-medium text-foreground underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:text-accent"
+              >
+                See how we work and what we value →
+              </a>
+            </p>
+          </div>
+        </section>
+
+        {/* 7. Questions */}
+        <section id="questions" className="border-t border-line">
+          <div className="mx-auto max-w-5xl px-6 py-24">
+            <SectionLabel n="06">Questions</SectionLabel>
+            <div className="grid gap-12 md:grid-cols-2">
+              {FAQS.map((faq) => (
+                <div key={faq.q}>
+                  <h3 className="text-lg font-semibold tracking-tight">
+                    {faq.q}
+                  </h3>
+                  <p className="mt-3 leading-relaxed text-muted">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 8. Closing CTA */}
+        <section id="contact" className="border-t border-line">
+          <div className="mx-auto max-w-5xl px-6 py-28 text-center">
+            <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
+              Tell us what you&apos;re trying to build.
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted">
+              Thirty minutes, no pitch deck. Bring a problem, a half-formed
+              idea, or a project that&apos;s stuck — you&apos;ll leave with a
+              straight answer about whether it&apos;s worth building and roughly
+              what it takes.
+            </p>
+            <div className="mt-10">
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-block rounded bg-accent px-8 py-4 font-medium text-white transition-opacity hover:opacity-85"
+              >
+                Book a call
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+
+      <SiteFooter />
+    </>
   );
 }
