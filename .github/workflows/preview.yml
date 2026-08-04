@@ -1,0 +1,47 @@
+name: Preview build
+
+# Runs automatically on every push to main. Publishes to a preview URL only —
+# it never touches techlon.io. Use it to see a change before approving the
+# production deploy.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: preview
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy out --project-name=techlon --branch=preview
+
+      - name: Link to the preview
+        run: |
+          {
+            echo "## Preview is ready"
+            echo ""
+            echo "**https://preview.techlon.pages.dev**"
+            echo ""
+            echo "Check it there, then approve the *Deploy to Cloudflare Pages*"
+            echo "run to publish the same build to techlon.io."
+          } >> "$GITHUB_STEP_SUMMARY"
