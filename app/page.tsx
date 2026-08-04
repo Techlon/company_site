@@ -19,6 +19,7 @@ import {
 
 const SPRINT_LIST_PRICE = "$2,000";
 const SPRINT_PRICE = "$500";
+const SPRINT_OFFER_END = "October 31, 2026";
 
 const TEAM = [
   {
@@ -232,8 +233,8 @@ export default function Home() {
                 continue, the sprint fee comes off the project cost.
               </p>
               <p>
-                A discovery sprint is normally {SPRINT_LIST_PRICE}. For the
-                next three months we&apos;re running it at 75% off, while we
+                A discovery sprint is normally {SPRINT_LIST_PRICE}. Through{" "}
+                {SPRINT_OFFER_END} we&apos;re running it at 75% off, while we
                 build our first public case studies. It&apos;s the cheapest way
                 to find out whether this is a three-month project or a
                 nine-month one, before you&apos;ve committed to either.
@@ -249,15 +250,9 @@ export default function Home() {
               <p className="font-mono text-sm text-panel-muted">
                 <span className="line-through">{SPRINT_LIST_PRICE}</span>{" "}
                 <span className="ml-1 rounded border border-panel-muted/40 px-2 py-1 text-xs uppercase tracking-widest">
-                  75% off · 3 months
+                  75% off · through {SPRINT_OFFER_END}
                 </span>
               </p>
-            </div>
-            <div className="mt-6">
-              <Todo>
-                pin a real end date for the 75% offer — a deadline converts
-                better than &ldquo;three months&rdquo;
-              </Todo>
             </div>
           </div>
         </section>
@@ -309,13 +304,15 @@ export default function Home() {
             </p>
             <p className="max-w-2xl leading-relaxed text-muted">
               Techlon is two engineers based in Cleveland, Ohio. We started
-              Techlon because [real reason, one sentence].
+              Techlon because too many startups and small and mid-size
+              companies were struggling to build the products, services, and
+              value their customers needed — so we stepped in to close that
+              gap.
             </p>
             <div className="mb-4 mt-6">
               <Todo>
-                save headshots to public/team/oluwagbemi.jpg and emeka.jpg
-                (they&apos;ll appear automatically) + one sentence on why you
-                started Techlon
+                save headshots to public/team/oluwagbemi.jpg and emeka.jpg —
+                they&apos;ll appear automatically once the files exist
               </Todo>
             </div>
             <div className="mt-10 grid gap-8 sm:grid-cols-2">
