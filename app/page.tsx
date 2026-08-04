@@ -7,7 +7,6 @@ import {
   SectionLabel,
   SiteFooter,
   SiteHeader,
-  Todo,
 } from "./ui";
 import {
   AbTestChart,
@@ -303,18 +302,11 @@ export default function Home() {
               The people who&apos;ll be building it
             </p>
             <p className="max-w-2xl leading-relaxed text-muted">
-              Techlon is two engineers based in Cleveland, Ohio. We started
-              Techlon because too many startups and small and mid-size
-              companies were struggling to build the products, services, and
-              value their customers needed — so we stepped in to close that
-              gap.
+              We started Techlon because too many startups and small and
+              mid-size companies were struggling to build the products,
+              services, and value their customers needed — so we stepped in
+              to close that gap.
             </p>
-            <div className="mb-4 mt-6">
-              <Todo>
-                save headshots to public/team/oluwagbemi.jpg and emeka.jpg —
-                they&apos;ll appear automatically once the files exist
-              </Todo>
-            </div>
             <div className="mt-10 grid gap-8 sm:grid-cols-2">
               {TEAM.map((member) => (
                 <div
