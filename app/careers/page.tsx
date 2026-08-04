@@ -79,8 +79,8 @@ export default function Careers() {
             Build things properly, with people who care that they work.
           </h1>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted">
-            Techlon is a small product engineering team building software and
-            AI products for startups and small companies. We hire slowly and
+            Techlon is a product engineering team building software and AI
+            products for startups and small companies. We hire slowly and
             deliberately — when we do, it&apos;s for people who want
             responsibility early and take craft seriously.
           </p>

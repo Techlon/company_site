@@ -12,10 +12,30 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://techlon.io";
+const TITLE = "Techlon — Software & AI products, end to end";
+const DESCRIPTION =
+  "Techlon is a product engineering team for startups and small companies. We take an idea, a rough spec, or a stalled project and turn it into something real, shipped, and running in production.";
+
 export const metadata: Metadata = {
-  title: "Techlon — Software & AI products, end to end",
-  description:
-    "Techlon is a product engineering team for startups and small companies. We take an idea, a rough spec, or a stalled project and turn it into something real, shipped, and running in production.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Techlon",
+    url: SITE_URL,
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  alternates: {
+    canonical: SITE_URL,
+  },
 };
 
 export default function RootLayout({

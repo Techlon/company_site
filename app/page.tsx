@@ -65,7 +65,7 @@ const PRINCIPLES = [
   },
   {
     title: "You see working software every week.",
-    body: "Not status reports. A deployed environment you can click through, from week one. If we're going the wrong direction, you'll know in seven days instead of three months.",
+    body: "Not status reports. A deployed environment you can click through, from week one. If we are going the wrong direction, you will know in seven days instead of three months.",
   },
   {
     title: "One team, start to finish.",
@@ -233,10 +233,9 @@ export default function Home() {
               </p>
               <p>
                 A discovery sprint is normally {SPRINT_LIST_PRICE}. Through{" "}
-                {SPRINT_OFFER_END} we&apos;re running it at 75% off, while we
-                build our first public case studies. It&apos;s the cheapest way
-                to find out whether this is a three-month project or a
-                nine-month one, before you&apos;ve committed to either.
+                {SPRINT_OFFER_END} we are running it at 75% off. It&apos;s the
+                cheapest way to find out whether your project is a three-month
+                project or a nine-month one, before you commit to either.
               </p>
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -302,13 +301,17 @@ export default function Home() {
               The people who&apos;ll be building it
             </p>
             <p className="max-w-2xl leading-relaxed text-muted">
-              We started Techlon because too many startups and small and
+              We started Techlon because we realized many startups, small and
               mid-size companies were struggling to build the products,
-              services, and value their customers needed — so we stepped in
-              to close that gap.
+              services their customers needed — so we stepped in to close that
+              gap.
             </p>
             <div className="mt-10 grid gap-8 sm:grid-cols-2">
-              {TEAM.map((member) => (
+              {/* Members still holding [bracketed] placeholders stay off the
+                  public site until their real details land. */}
+              {TEAM.filter(
+                (member) => !`${member.role}${member.bio}`.includes("["),
+              ).map((member) => (
                 <div
                   key={member.name}
                   className="rounded-lg border border-line p-6"
