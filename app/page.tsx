@@ -27,7 +27,7 @@ const TEAM = [
     name: "Oluwagbemi Lesi",
     role: "Founder",
     photo: "/team/oluwagbemi.jpg",
-    bio: "MBA in Business Analytics from Case Western Reserve, on top of seven years across financial services, real estate, and FinTech regulation. Builds and validates predictive models in Python — forecasting, credit risk, NLP — and specializes in model validation: finding where reported performance overstates real signal. Before Techlon: head of operations at a FinTech checkout platform, co-founder of a real estate firm, and a lawyer designing compliance frameworks for regulated financial products.",
+    bio: "Builds and ships machine learning in Python — PyTorch and TensorFlow for deep learning, XGBoost and scikit-learn for tabular problems, SBERT and RoBERTa for language, and the Spark, Airflow, Docker, and AWS pipework that keeps them running. Works the whole path from data to deployed model. Spends most of his attention on validation: a forecasting model he built cut test error 41% against its baseline, and he traced the baseline's flattering 0.977 R² to target leakage rather than skill. Earlier, ran operations at a FinTech checkout platform, where digging through transaction data cut checkout errors by 75%.",
   },
   {
     name: "Emeka Osuagwu",
@@ -318,17 +318,18 @@ export default function Home() {
                   key={member.name}
                   className="rounded-lg border border-line p-6"
                 >
-                  {/* Photo renders automatically once the file exists in public/ */}
+                  {/* Portrait frame: 4:5 with object-top keeps the whole face
+                      and bust in shot whatever the source photo's ratio. */}
                   {existsSync(join(process.cwd(), "public", member.photo)) ? (
                     <Image
                       src={member.photo}
                       alt={member.name}
-                      width={96}
-                      height={96}
-                      className="mb-4 h-24 w-24 rounded-full object-cover"
+                      width={320}
+                      height={400}
+                      className="mb-5 aspect-[4/5] w-40 rounded-lg object-cover object-top"
                     />
                   ) : (
-                    <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-line bg-line/60 font-mono text-xs text-muted">
+                    <div className="mb-5 flex aspect-[4/5] w-40 items-center justify-center rounded-lg border border-dashed border-line bg-line/60 font-mono text-xs text-muted">
                       photo
                     </div>
                   )}

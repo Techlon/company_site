@@ -13,6 +13,11 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Gated: the run pauses here until you approve it in the Actions tab.
+    # Nothing reaches techlon.io without that click.
+    environment:
+      name: production
+      url: https://techlon.io
     permissions:
       contents: read
     steps:
