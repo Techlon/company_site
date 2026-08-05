@@ -27,13 +27,17 @@ const TEAM = [
     name: "Oluwagbemi Lesi",
     role: "Founder",
     photo: "/team/oluwagbemi.jpg",
-    bio: "Oluwagbemi Lesi is a data scientist and AI/ML model builder specializing in predictive modeling, deep learning, and NLP. Holding an MBA in Business Analytics from Case Western Reserve University's Weatherhead School of Management (3.95 CGPA), Oluwagbemi pairs rigorous technical execution with sharp model validation instincts, built on seven years across financial services, real estate, and FinTech regulation. Recent work includes an LSTM forecasting model that cut test error by 41% and an ensemble NLP fraud-detection system (SBERT, RoBERTa, XGBoost) with an LLM auditor stage. Fluent across PyTorch, TensorFlow, AWS, and Spark, with a legal foundation in FinTech compliance and model risk governance.",
+    bio: [
+      "Oluwagbemi Lesi is a data scientist and AI/ML model builder specializing in predictive modeling, deep learning, and NLP.",
+      "Holding an MBA in Business Analytics from Case Western Reserve University's Weatherhead School of Management (3.95 CGPA), Oluwagbemi pairs rigorous technical execution with sharp model validation instincts, built on seven years across financial services, real estate, and FinTech regulation.",
+      "Recent work includes an LSTM forecasting model that cut test error by 41% and an ensemble NLP fraud-detection system (SBERT, RoBERTa, XGBoost) with an LLM auditor stage. Fluent across PyTorch, TensorFlow, AWS, and Spark, with a legal foundation in FinTech compliance and model risk governance.",
+    ],
   },
   {
     name: "Emeka Osuagwu",
     role: "[Role]",
     photo: "/team/emeka.jpg",
-    bio: "[Profile and photo coming.]",
+    bio: ["[Profile and photo coming.]"],
   },
 ];
 
@@ -312,7 +316,8 @@ export default function Home() {
               {/* Members still holding [bracketed] placeholders stay off the
                   public site until their real details land. */}
               {TEAM.filter(
-                (member) => !`${member.role}${member.bio}`.includes("["),
+                (member) =>
+                  !`${member.role}${member.bio.join(" ")}`.includes("["),
               ).map((member) => (
                 <div
                   key={member.name}
@@ -335,9 +340,13 @@ export default function Home() {
                   )}
                   <p className="font-semibold">{member.name}</p>
                   <p className="text-sm text-muted">{member.role}</p>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {member.bio}
-                  </p>
+                  {/* hyphens-auto keeps justified text from opening up rivers
+                      of whitespace in a column this narrow. */}
+                  <div className="mt-3 space-y-3 hyphens-auto text-justify text-sm leading-relaxed text-muted">
+                    {member.bio.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
