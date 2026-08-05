@@ -28,8 +28,8 @@ const TEAM = [
     role: "Founder",
     photo: "/team/oluwagbemi.jpg",
     bio: [
-      "Oluwagbemi Lesi is a data scientist and AI/ML model builder specializing in predictive modeling, deep learning, and NLP.",
-      "Holding an MBA in Business Analytics from Case Western Reserve University's Weatherhead School of Management (3.95 CGPA), Oluwagbemi pairs rigorous technical execution with sharp model validation instincts, built on seven years across financial services, real estate, and FinTech regulation.",
+      "Oluwagbemi Lesi is a product developer, data scientist and AI/ML model builder specializing in predictive modeling, deep learning, and NLP.",
+      "Holding an MBA in Business Analytics from Case Western Reserve University enables him to pair rigorous technical execution with sharp model validation instincts, built on seven years across financial services, real estate, and FinTech regulation.",
       "Recent work includes an LSTM forecasting model that cut test error by 41% and an ensemble NLP fraud-detection system (SBERT, RoBERTa, XGBoost) with an LLM auditor stage. Fluent across PyTorch, TensorFlow, AWS, and Spark, with a legal foundation in FinTech compliance and model risk governance.",
     ],
   },
