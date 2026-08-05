@@ -27,7 +27,7 @@ const TEAM = [
     name: "Oluwagbemi Lesi",
     role: "Founder",
     photo: "/team/oluwagbemi.jpg",
-    bio: "Builds and ships machine learning in Python — PyTorch and TensorFlow for deep learning, XGBoost and scikit-learn for tabular problems, SBERT and RoBERTa for language, and the Spark, Airflow, Docker, and AWS pipework that keeps them running. Works the whole path from data to deployed model. Spends most of his attention on validation: a forecasting model he built cut test error 41% against its baseline, and he traced the baseline's flattering 0.977 R² to target leakage rather than skill. Earlier, ran operations at a FinTech checkout platform, where digging through transaction data cut checkout errors by 75%.",
+    bio: "Oluwagbemi Lesi is a data scientist and AI/ML model builder specializing in predictive modeling, deep learning, and NLP. Holding an MBA in Business Analytics from Case Western Reserve University's Weatherhead School of Management (3.95 CGPA), Oluwagbemi pairs rigorous technical execution with sharp model validation instincts, built on seven years across financial services, real estate, and FinTech regulation. Recent work includes an LSTM forecasting model that cut test error by 41% and an ensemble NLP fraud-detection system (SBERT, RoBERTa, XGBoost) with an LLM auditor stage. Fluent across PyTorch, TensorFlow, AWS, and Spark, with a legal foundation in FinTech compliance and model risk governance.",
   },
   {
     name: "Emeka Osuagwu",
