@@ -35,9 +35,13 @@ const TEAM = [
   },
   {
     name: "Emeka Osuagwu",
-    role: "[Role]",
+    role: "Senior Engineer",
     photo: "/team/emeka.jpg",
-    bio: ["[Profile and photo coming.]"],
+    bio: [
+      "Emeka Osuagwu is a senior engineer with over a decade shipping web, mobile, and platform products across fintech, payments, and healthcare.",
+      "He has led engineering teams of twenty and more, architected banking services covering loans, investments, and KYC, and run cloud migrations that cut operating costs by 30% while lifting platform performance by 40%. He builds to PCI-DSS and GDPR standards where money and patient data are involved.",
+      "At Techlon he leads web and app development and product development, working across C#/.NET, Python, Go, Java, React, and React Native on AWS and GCP — microservices, Kafka, Terraform, and Docker.",
+    ],
   },
 ];
 
@@ -313,11 +317,14 @@ export default function Home() {
               gap.
             </p>
             <div className="mt-10 grid gap-8 sm:grid-cols-2">
-              {/* Members still holding [bracketed] placeholders stay off the
-                  public site until their real details land. */}
+              {/* A member goes public only once their details are real and
+                  their photo file exists — no half-finished cards on the
+                  live site. Drop the photo into public/team/ and they appear
+                  on the next deploy. */}
               {TEAM.filter(
                 (member) =>
-                  !`${member.role}${member.bio.join(" ")}`.includes("["),
+                  !`${member.role}${member.bio.join(" ")}`.includes("[") &&
+                  existsSync(join(process.cwd(), "public", member.photo)),
               ).map((member) => (
                 <div
                   key={member.name}
@@ -325,19 +332,13 @@ export default function Home() {
                 >
                   {/* Portrait frame: 4:5 with object-top keeps the whole face
                       and bust in shot whatever the source photo's ratio. */}
-                  {existsSync(join(process.cwd(), "public", member.photo)) ? (
-                    <Image
-                      src={member.photo}
-                      alt={member.name}
-                      width={320}
-                      height={400}
-                      className="mb-5 aspect-[4/5] w-40 rounded-lg object-cover object-top"
-                    />
-                  ) : (
-                    <div className="mb-5 flex aspect-[4/5] w-40 items-center justify-center rounded-lg border border-dashed border-line bg-line/60 font-mono text-xs text-muted">
-                      photo
-                    </div>
-                  )}
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    width={320}
+                    height={400}
+                    className="mb-5 aspect-[4/5] w-40 rounded-lg object-cover object-top"
+                  />
                   <p className="font-semibold">{member.name}</p>
                   <p className="text-sm text-muted">{member.role}</p>
                   {/* hyphens-auto keeps justified text from opening up rivers
