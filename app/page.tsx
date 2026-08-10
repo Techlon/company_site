@@ -35,7 +35,7 @@ const TEAM = [
   },
   {
     name: "Emeka Osuagwu",
-    role: "Global Principal Engineer",
+    role: "Global Engineering Manager",
     photo: "/team/emeka.jpg",
     bio: [
       "Emeka Osuagwu is a principal engineer with over a decade shipping web, mobile, and platform products across fintech, payments, and healthcare.",
