@@ -38,7 +38,7 @@ const TEAM = [
     role: "Global Engineering Manager",
     photo: "/team/emeka.jpg",
     bio: [
-      "Emeka Osuagwu is a principal engineer with over a decade shipping web, mobile, and platform products across fintech, payments, and healthcare.",
+      "Emeka Osuagwu is an engineering leader with over a decade shipping web, mobile, and platform products across fintech, payments, and healthcare.",
       "He has led engineering teams of twenty and more, architected banking services covering loans, investments, and KYC, and run cloud migrations that cut operating costs by 30% while lifting platform performance by 40%. He builds to PCI-DSS and GDPR standards where money and patient data are involved.",
       "At Techlon he leads web and app development and product development, working across C#/.NET, Python, Go, Java, React, and React Native on AWS and GCP — microservices, Kafka, Terraform, and Docker.",
     ],
